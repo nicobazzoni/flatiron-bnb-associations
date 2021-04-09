@@ -10,16 +10,59 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210407205417) do
+ActiveRecord::Schema.define(version: 20210409205856) do
 
-  create_table "listings", force: :cascade do |t|
+  create_table "cities", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "name"
+  end
+
+  create_table "listings", force: :cascade do |t|
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "address"
+    t.string   "listing_type"
+    t.string   "title"
+    t.text     "description"
+    t.decimal  "price"
+    t.integer  "neighborhood_id"
+    t.integer  "host_id"
+  end
+
+  create_table "neighborhoods", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "name"
+    t.integer  "city_id"
+  end
+
+  create_table "reservations", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.date     "checkin"
+    t.date     "checkout"
+    t.integer  "listing_id"
+    t.integer  "guest_id"
+    t.string   "listing"
+    t.string   "guest"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.string   "description"
+    t.integer  "rating"
+    t.string   "guest"
+    t.string   "reservation"
+    t.integer  "guest_id"
+    t.integer  "reservation_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "name"
   end
 
 end
